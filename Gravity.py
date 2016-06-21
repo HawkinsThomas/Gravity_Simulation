@@ -2,7 +2,7 @@ from Tkinter import *
 from math import *
 import time, random
 root = Tk()
-canvas = Canvas(root, width = 700, height = 700)
+canvas = Canvas(root, width = 1000, height = 600, background ='black')
 canvas.pack()
 
 
@@ -26,8 +26,8 @@ class Particle ():
         rads = atan2(-dy,dx)
         rads %= 2*pi
         r = sqrt(((dx)**2) + ((dy)**2))
-        self.accX = -40000*(cos(rads))/(r**2)
-        self.accY = 40000*(sin(rads))/(r**2)
+        self.accX = -1100*(cos(rads))/(r**2)
+        self.accY = 1100*(sin(rads))/(r**2)
        
     def getX(self):
         return self.positionX
@@ -40,28 +40,30 @@ class Particle ():
         self.positionX += self.velX
         self.positionY += self.velY
         
-        if (self.positionY>=700 or self.positionY <= 0):
-            self.velY *= -0.5
-        if (self.positionX >=700 or self.positionX <= 0):
-            self.velX *= -0.5
+        if (self.positionY>=1080 or self.positionY <= 0):
+            self.velY *= -0.7
+        if (self.positionX >=1920 or self.positionX <= 0):
+            self.velX *= -0.7
         
         
             
 
 def main():
+    colours = ["gray", "light gray", "dark gray", "white", "light yellow", "light blue", "beige"]
     particles = []
-    for i in range(0, 25):
-        x = random.randint(0,700)
-        y = random.randint(0,700)
-        v = random.randint(-10,10)
-        vy = random.randint(-10,10)
-        particle = Particle(5, "purple", x, y,v,vy,5,0,0)
+    for i in range(0, 40):
+        #x = random.randint(0,1920)
+        x = 590 + random.randint(0,200)*0.1
+        y = 300
+        v = random.randint(2,5) * 0.3
+        vy = random.randint(900,1000)* -0.003
+        particle = Particle(5, colours[i%len(colours)], x, y,v,vy,2,0,0)
         particles.append(particle)
-        blob = Particle(1, "dark green",350,350,0,0,5,0,0)
+        blob = Particle(1, "orange",500,300,0,0,10,0,0)
     
     while True:
         
-        time.sleep(0.03)        
+        time.sleep(0.02)        
         canvas.delete("all")
         blob.move()
         blob.draw()
