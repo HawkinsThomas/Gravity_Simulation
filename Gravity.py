@@ -57,7 +57,7 @@ def main():
         y = 300
         v = random.randint(2,5) * 0.3
         vy = random.randint(900,1000)* -0.003
-        particle = Particle(5, colours[i%len(colours)], x, y,v,vy,2,0,0)
+        particle = Particle(5, colours[i%len(colours)], x, y,v,vy,random.randint(100,300)*.01,0,0)
         particles.append(particle)
         blob = Particle(1, "orange",500,300,0,0,10,0,0)
     
