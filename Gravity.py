@@ -40,30 +40,50 @@ class Particle ():
         self.positionX += self.velX
         self.positionY += self.velY
         
-        if (self.positionY>=1080 or self.positionY <= 0):
-            self.velY *= -0.7
-        if (self.positionX >=1920 or self.positionX <= 0):
-            self.velX *= -0.7
+        #if (self.positionY>=1080 or self.positionY <= 0):
+        #    self.velY *= -0.7
+        #if (self.positionX >=1920 or self.positionX <= 0):
+        #    self.velX *= -0.7
         
         
             
 
 def main():
-    colours = ["gray", "light gray", "dark gray", "white", "light yellow", "light blue", "beige"]
+    colours = ["light blue", "dark gray", "dark green", "light yellow", "beige"]
+    asteroidcolours= ["brown", "dark gray", "gray"]
     particles = []
-    for i in range(0, 40):
+    for i in range(0, 6):
         #x = random.randint(0,1920)
-        x = 590 + random.randint(0,200)*0.1
+        x = 590 + random.randint(0,1000)*0.1
         y = 300
-        v = random.randint(2,5) * 0.3
-        vy = random.randint(900,1000)* -0.003
-        particle = Particle(5, colours[i%len(colours)], x, y,v,vy,random.randint(100,300)*.01,0,0)
+        v = random.randint(0,1) * 0.3
+        vy = random.randint(600,900)* -0.003
+        particle = Particle(5, colours[i%len(colours)], x, y,v,vy,random.randint(100,500)*.01,0,0)
         particles.append(particle)
-        blob = Particle(1, "orange",500,300,0,0,10,0,0)
-    
-    while True:
+    for i in range(0, 3):
+        #x = random.randint(0,1920)
+        x = 1090 + random.randint(0,200)*0.1
+        y = 300
+        v = random.randint(0,1) * 0.3
+        vy = random.randint(100,200)* -0.003
+        particle = Particle(5, "white", x, y,v,vy,random.randint(100,200)*.01,0,0)
+        particles.append(particle)
+
         
-        time.sleep(0.02)        
+    blob = Particle(1, "orange",500,300,0,0,10,0,0)
+    p = 0
+    while True:
+    	p = p + 1
+        if ((p < 900) and (p%4 == 0)):
+        	x = random.randint(780,800)
+	        y = 300
+	        v = 0#random.randint(0,1) * 0.3
+	        vy = random.randint(640,650)* -0.003
+	        particle = Particle(5, asteroidcolours[i%3], x, y,v,vy,random.randint(100,200)*.01,0,0)
+	        particles.append(particle)
+	        
+
+        time.sleep(0.01)        
         canvas.delete("all")
         blob.move()
         blob.draw()
